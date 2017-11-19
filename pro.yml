@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+
+  web:
+    extends:
+      file: base.yml
+      service: web
+    build:
+      args:
+        - DJANGO_ENV=pro
+    command: bash -C "./start_produccion"
+    volumes:
+      - ./webappdjango:/webappdjango
+    ports:
+      - "8010:8010"
+    restart: always
