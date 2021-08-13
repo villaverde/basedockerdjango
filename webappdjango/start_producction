@@ -1,0 +1,22 @@
+!/bin/bash
+
+python manage.py collectstatic --noinput
+
+echo Creo el directorio srv logs
+mkdir -p /srv/logs/
+echo Creo el archivo de log de gunicorn
+touch /srv/logs/gunicorn.log
+echo Creo el archivo de acces
+touch /srv/logs/access.log
+tail -n 0 -f /srv/logs/*.log &
+echo Ejecuto las migraciones
+python manage.py migrate
+echo Starting Gunicorn.
+gunicorn gdixital.wsgi:application \
+    --name elegipodologotop \
+    --bind 0.0.0.0:8010 \
+    --workers 5 \
+    --timeout 240 \
+    --log-level=debug \
+    "$@"
+
