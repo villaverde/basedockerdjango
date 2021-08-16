@@ -21,11 +21,8 @@ if [ -n "$1" ]; then # Comprobamos que se le pasa el nombre del poruyecto
 	echo "${CVERDE} Movemos dev.py y pro.py al settings del proyecto ${NOCOLOR}"
 	cp dev.py webappdjango/$1/settings/dev.py  # Esto tendra que ser cambiado a un mv cuando este terminado   
 	cp pro.py webappdjango/$1/settings/pro.py  # Esto tendra que ser cambiado a un mv cuando este terminado   
-	echo "${CVERDE} Añadimos las variables de entorno minimas al .env${NOCOLOR"
-	cat "DJANGO_SETTINGS_MODULE=${1}.settings.dev > .env
-
-
-
+	echo "${CVERDE} Añadimos las variables de entorno minimas al .env${NOCOLOR}"
+	echo "DJANGO_SETTINGS_MODULE=${1}.settings.dev" >> .env
 
 else
 
