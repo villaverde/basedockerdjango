@@ -12,7 +12,8 @@ if [ -n "$1" ]; then # Comprobamos que se le pasa el nombre del poruyecto
 	fi
 
 	echo "${CVERDE} Inicializamos el proyecto $1 ${NOCOLOR}"
-	mv env .env  # Renombramos el fichero env a .env para ir colocando las variables mas esenciales  
+	mv env .env  # Renombramos el fichero env a .env para ir colocando las variables mas esenciales
+	docker-compose -f dev.yml build  
 	docker-compose -f dev.yml run web django-admin startproject $1  .
 	CMARIADB=$(openssl rand -base64 16)
 	

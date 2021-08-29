@@ -1,6 +1,12 @@
 version: "2"
 
 services:
+  db:
+    image: mariadb
+    env_file: .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
   web:
     extends:
       file: base.yml
@@ -8,8 +14,15 @@ services:
     build:
       args:
         - DJANGO_ENV=dev
+    depends_on:
+        - db
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./webappdjango:/webappdjango
     ports:
       - "8000:8000"
+    links:
+      - db:db
+
+volumes:
+  mariadb:
