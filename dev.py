@@ -9,10 +9,6 @@ MIDDLEWARE += [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-STATICFILES_DIRS = [
-    BASE_DIR + '/../static',
-]
-
 
 def show_toolbar(request):
     return True

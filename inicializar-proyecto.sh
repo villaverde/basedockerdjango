@@ -28,7 +28,9 @@ if [ -n "$1" ]; then # Comprobamos que se le pasa el nombre del poruyecto
 	echo "MYSQL_ROOT_PASSWORD=cambiame" >> .env  # Clave root de mariadb
 	echo "MARIADB_DATABASE=${1}" >> .env  # Nombre de la db. Por defecto le pone la del prouecto
 	echo "MARIADB_USER=${1}" >> .env  # Por defecto usa el nombre de prouecto como usuario
-	echo "MARIADB_PASSWORD=${CMARIADB}" >> .env # Recomendable cambiar clave db usuario   
+	echo "MARIADB_PASSWORD=${CMARIADB}" >> .env # Recomendable cambiar clave db usuario
+	echo "DB_HOST=db"  >> .env  # Pongo el host db por defecto para desarollo
+	echo "DB_PORT=3306" >> .env  # Pongo le puerto por defecto 3306 de Mariadb/Mysql
 else
 
 	echo "${CROJO} Es obligatorio que le pases el nombre del proyecto ${NOCOLOR}. Ejemplo ./inicializar-proyecto.sh tunombreporoyecto"

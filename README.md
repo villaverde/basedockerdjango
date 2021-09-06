@@ -3,9 +3,30 @@ lo primero que se tiene que hacer es crear un archivo .env vacío en el que se a
 
 ### Como crear un proyecto django
 Para creaer un proyecto ejecuta lo siguiente
-`docker-compose -f dev.yml run web django-admin startproject nombreprojecto .`
+`sh  inicializar-proyecto.sh .`
 
-### Crear una aplicaion django
-`docker-compose -f dev.yml run web python3 manage.py startapp nombreapp`
+### Configurar el proyecto
+Edita el archivo webappdjango/nombre_de_tu_proyecto/settins/base.py
 
-
+busca la variable siguiente:
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+y sustitullela por esta otra
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['MARIADB_DATABASE'],
+        'USER': os.environ['MARIADB_USER'],
+        'PASSWORD': os.environ['MARIADB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.environ['DB_PORT'],
+    }
+}
+```
